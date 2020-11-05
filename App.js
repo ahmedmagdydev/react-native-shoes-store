@@ -1,21 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import DiscoverScreen from "./screens/Discover.screen";
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+import DetailsScreen from "./screens/Details.screen";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const Stack = createSharedElementStackNavigator(
+  {
+    Home: {
+      screen: DiscoverScreen,
+    },
+    Details: {
+      screen: DetailsScreen,
+    },
   },
-});
+  {},
+  {}
+);
+
+// function App() {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="Home"
+//         component={DiscoverScreen}
+//         options={{
+//           title: "Discover",
+//           // headerTransparent: true,
+//           headerStyle: {
+//             backgroundColor: "#f7f7f7",
+//             shadowOpacity: 0,
+//           },
+//           headerTitleStyle: {
+//             fontSize: 30,
+//             fontWeight: "700",
+//           },
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
+export default createAppContainer(Stack);
